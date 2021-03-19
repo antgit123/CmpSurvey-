@@ -3,6 +3,9 @@ import { Route } from 'react-router';
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
+import { ViewSurvey } from './components/ViewSurvey';
+import { ViewSurveyDetail } from './components/ViewSurveyDetail';
+import { SurveyLayout } from './components/SurveyLayout';
 import { Counter } from './components/Counter';
 
 export default class App extends Component {
@@ -10,11 +13,13 @@ export default class App extends Component {
 
   render() {
     return (
-      <Layout>
-        <Route exact path='/' component={Home} />
-        <Route path='/counter' component={Counter} />
-        <Route path='/fetchdata' component={FetchData} />
-      </Layout>
+      <SurveyLayout>            
+            <Route exact path='/' component={Home} />
+            <Route path='/counter' component={Counter} />
+            <Route path='/fetchdata' component={FetchData} />
+            <Route exact path='/surveys' component={ViewSurvey} />
+            <Route path='/surveys/:id' component={ViewSurveyDetail} />
+        </SurveyLayout>
     );
   }
 }
