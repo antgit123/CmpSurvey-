@@ -13,7 +13,7 @@ export class SurveyLayout extends Component {
                         
                     </Col>                    
                     <Col sm={8}>
-                        <div className="container appContainer"> 
+                        <div className="appContainer"> 
                             {this.props.children}
                         </div>
                     </Col>
