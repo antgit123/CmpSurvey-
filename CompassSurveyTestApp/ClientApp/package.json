@@ -3,6 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-transform-react-jsx": "^7.12.17",
+    "@babel/plugin-transform-runtime": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "@babel/preset-flow": "^7.12.13",
+    "@babel/preset-react": "^7.12.13",
     "bootstrap": "^3.4.1",
     "react": "^16.0.0",
     "react-bootstrap": "^0.31.5",
@@ -10,17 +16,20 @@
     "react-router-bootstrap": "^0.24.4",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.17",
-    "react-test-renderer": "^17.0.1",
+    "react-test-renderer": "^16.0.0",
     "rimraf": "^2.6.2"
   },
   "scripts": {
     "start": "rimraf ./build && react-scripts start",
     "build": "react-scripts build",
     "test": "jest",
+    "test:watch": "jest --watch",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
     "babel-jest": "^26.6.3",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
     "jest": "^26.6.3"
   }
 }
