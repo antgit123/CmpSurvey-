@@ -1,9 +1,14 @@
 # CmpSurvey-
+
+
 The purpose of this test application is to use sample survey test data to create a working Front end webapp solution which can be used to accomplish the following tasks:
 1. Display the list of surveys which is obtained from the database
 2. Select a survey out of the list of surveys to view all its questions and options 
 
-Launching the application 
+## Live application
+The application is also deployed on cloud and can be viewed in the following URL -> https://devant.azurewebsites.net/
+
+## Launching the application - locally
 
 Steps - Local development setup 
 
@@ -24,4 +29,4 @@ Launch Application
 1. After completing the above steps, compile and run the application using the IIS Express launch button located in Visual studio.
 2. A new browser window should open and should display the home screen of the application 
 
-The application is also deployed on cloud and can be viewed in the following URL -> https://devant.azurewebsites.net/
+
