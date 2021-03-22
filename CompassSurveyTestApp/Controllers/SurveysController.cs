@@ -55,12 +55,7 @@ namespace CompassSurveyTestApp.Controllers
             if (survey == null)
             {
                 return NotFound();
-            }
-            else
-            {
-                //get survey along with list of questions 
-                _context.Survey.Where(s => s.Id == id).Include(q => q.Questions).ToList();
-            }     
+            }                
             return Ok(_context.Questions.Where(question => question.SurveyId == id).Include(q => q.Options).ToList());
         }
 
@@ -95,7 +90,7 @@ namespace CompassSurveyTestApp.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(survey);
         }
 
         // POST: api/Surveys

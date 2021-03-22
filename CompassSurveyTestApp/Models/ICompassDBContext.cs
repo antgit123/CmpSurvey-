@@ -9,8 +9,9 @@ namespace CompassSurveyTestApp.Models
     public interface ICompassDBContext: IDisposable
     {
         IEnumerable<Survey> GetAllItems();
-        Survey Add(Survey newItem);
-        Survey GetById(Guid id);
-        void Remove(Guid id);
+        Task AddAsync(Survey newItem);
+        Task<List<Survey>> ListAsync();
+        Task<Survey> GetSurveyAsync(int id);
+        Task UpdateSurveyAsync(int surveyId, Survey survey);
     }
 }

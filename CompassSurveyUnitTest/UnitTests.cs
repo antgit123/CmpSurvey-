@@ -29,20 +29,54 @@ namespace CompassSurveyUnitTest
             string surveyName = "Survey 4";
             int surveyId = 4;        
             Survey sample_survey = GetSurvey();
-            var mockRepo = new Mock<CompassDBContext>();            
+
+            var mockRepo = new Mock<CompassDBContext>();
+            mockRepo.SetupAllProperties();
+            mockRepo.Setup(repo => repo.GetSurveyAsync(surveyId))
+                .ReturnsAsync(sample_survey);
             var controller = new SurveysController(mockRepo.Object);
 
             // Act
             var result = await controller.PostSurvey(sample_survey);
             // Assert
-            var okResult = Assert.IsType<OkObjectResult>(result);
+            var okResult = Assert.IsType<CreatedAtActionResult>(result);
             var returnSession = Assert.IsType<Survey>(okResult.Value);
-
             Assert.Equal(surveyId, returnSession.Id);
             Assert.Equal(surveyName, returnSession.Name);
             Assert.Equal(1, returnSession.Questions.Count);
         }
 
+        [Fact]
+        public async Task Verify_AddAndUpdateDummySurvey()
+        {
+            // Arrange
+            string surveyName = "Survey 4";
+            int surveyId = 4;
+            Survey sample_survey = GetSurvey();
+            Survey updated_survey = sample_survey;
+            updated_survey.Name = "Updated survey 4";
+            var mockRepo = new Mock<CompassDBContext>();
+            mockRepo.SetupAllProperties();
+            mockRepo.Setup(repo => repo.GetSurveyAsync(surveyId))
+                .ReturnsAsync(sample_survey);
+            mockRepo.Setup(repo => repo.UpdateSurveyAsync(surveyId,sample_survey))
+                .Returns(Task.CompletedTask).Verifiable();
+            var controller = new SurveysController(mockRepo.Object);
+
+            // Act
+            var result = await controller.PostSurvey(sample_survey);
+            // Assert
+            var okResult = Assert.IsType<CreatedAtActionResult>(result);
+            var returnSession = Assert.IsType<Survey>(okResult.Value);
+            //Act
+            sample_survey.Name = "Updated survey 4";
+            var updateResult = await controller.PutSurvey(surveyId, sample_survey);
+            var okUpdateResult = Assert.IsType<OkObjectResult>(updateResult);
+            var updatedSurveyObject = Assert.IsType<Survey>(okUpdateResult.Value);           
+            Assert.Equal(updated_survey.Name, updatedSurveyObject.Name);           
+        }
+
+        //Failure case
         [Fact]
         public async Task CreateActionResult_ReturnsNotFoundObjectResultForIncorrectEntity()
         {
@@ -50,6 +84,9 @@ namespace CompassSurveyUnitTest
             var nonExistentSurveyId = 999;
             string surveyName = "Survey 999";           
             var mockRepo = new Mock<CompassDBContext>();
+            mockRepo.SetupAllProperties();
+            //mockRepo.Setup(repo => repo.GetSurveyAsync(nonExistentSurveyId))
+              //  .ReturnsAsync(sample_survey);
             var controller = new SurveysController(mockRepo.Object);
 
             var survey = new Survey()
@@ -63,6 +100,26 @@ namespace CompassSurveyUnitTest
             // Assert
             var actionResult = Assert.IsType<ActionResult<Questions>>(result);
             Assert.IsType<NotFoundObjectResult>(actionResult.Result);
+        }
+
+        [Fact]
+        public async Task Verify_GetSurvey()
+        {
+            // Arrange
+            var surveyId = 4;
+            string surveyName = "Survey 4";
+            var sample_survey = GetSurvey();
+            var mockRepo = new Mock<CompassDBContext>();
+            mockRepo.SetupAllProperties();
+            mockRepo.Setup(repo => repo.GetSurveyAsync(surveyId))
+              .ReturnsAsync(sample_survey);
+            var controller = new SurveysController(mockRepo.Object);
+            // Act
+            var result = await controller.GetSurvey(4);
+            // Assert
+            var actionResult = Assert.IsType<ActionResult<Questions>>(result);
+            Assert.IsType<NotFoundObjectResult>(actionResult.Result);
+            var okResult = Assert.IsType<OkObjectResult>(result);      
         }
 
         public Survey GetSurvey()

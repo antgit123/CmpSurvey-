@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
@@ -7,20 +8,46 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace CompassSurveyTestApp.Models
 {
-    public partial class CompassDBContext : DbContext
-    {
+    public partial class CompassDBContext : DbContext,ICompassDBContext
+    {      
         public CompassDBContext()
         {
-        }
+
+        }        
 
         public CompassDBContext(DbContextOptions<CompassDBContext> options)
             : base(options)
         {
+            
         }     
-
+        
         public virtual DbSet<Options> Options { get; set; }
         public virtual DbSet<Questions> Questions { get; set; }
-        public virtual DbSet<Survey> Survey { get; set; }      
+        public virtual DbSet<Survey> Survey { get; set; }
+
+        public virtual Task<Survey> GetSurveyAsync(int id)
+        {
+            return Survey
+                .Include(s => s.Questions)
+                .FirstOrDefaultAsync(s => s.Id == id);
+        }
+
+        public virtual Task<List<Survey>> ListAsync()
+        {
+            return Survey.Include(s => s.Questions).ToListAsync();
+        }
+
+        public virtual Task AddAsync(Survey survey)
+        {
+            Survey.Add(survey);
+            return this.SaveChangesAsync();
+        }
+
+        public virtual Task UpdateSurveyAsync(int surveyId,Survey survey)
+        {
+            Entry(survey).State = EntityState.Modified;
+            return SaveChangesAsync();
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -104,9 +131,10 @@ namespace CompassSurveyTestApp.Models
                     .IsUnicode(false);
             });
         }
-        /*public void MarkAsModified(Survey item)
+
+        public virtual IEnumerable<Survey> GetAllItems()
         {
-            Entry(item).State = EntityState.Modified;
-        }*/
+            return null;
+        }
     }
 }
