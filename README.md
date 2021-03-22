@@ -13,12 +13,13 @@ The application is also deployed on cloud and can be viewed in the following URL
 Steps - Local development setup 
 
 Environment setup
-1. Install Visual studio 17 
-2. Download application code using git command line tool -> git clone  <application git url>
-3. Navigate inside the project structure and open the CompassSurveyTestApp.sln file in Visual Studio 
+1. Install Visual studio. Please refer to the link -> https://docs.microsoft.com/en-us/visualstudio/install/install-visual-studio?view=vs-2019
+2. Install node js to get npm package manager and node js runtime library dependencies. Please refer to the link -> https://nodejs.org/en/download/
+3. Download application code using git command line tool -> git clone  <application git url>
+4. Navigate inside the project structure and open the CompassSurveyTestApp.sln file in Visual Studio 
 
 Database Setup
-1. Install Microsoft SQL Server Management studio 
+1. Install Microsoft SQL Server Management studio. Please refer to the link -> https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15 
 2. Create a local database server with the name -> (localdb)\ProjectsV13
 3. Create a local database by the name "CompassDB" by connecting to the local development server in Microsoft SQL Server Management studio 
 4. After the database is created, right click the database and select new query 
