@@ -9,7 +9,7 @@ using CompassSurveyTestApp.Models;
 
 /*
 This is the controller file which uses the dbContext class to implement 
-the HTTP API methods for fetching the survey data 
+the HTTP API methods for fetching the survey data from the database
 */
 
 namespace CompassSurveyTestApp.Controllers
@@ -18,7 +18,7 @@ namespace CompassSurveyTestApp.Controllers
     [ApiController]
     public class SurveysController : ControllerBase
     {
-        private readonly CompassDBContext _context;
+        private readonly CompassDBContext _context;        
 
         public SurveysController(CompassDBContext context)
         {
@@ -36,7 +36,8 @@ namespace CompassSurveyTestApp.Controllers
         [Route("~/getAllSurveyData")]
         public async Task<IActionResult> GetSurveys()
         {       
-            var data = _context.Survey.Include(survey => survey.Questions).ToList();
+            var data = _context.Survey.Include(survey => survey.Questions)
+                .ToList();
             return Ok(new {surveys =  data });
         } 
 
@@ -77,8 +78,7 @@ namespace CompassSurveyTestApp.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(survey).State = EntityState.Modified;
-
+            _context.Entry(survey).State = EntityState.Modified;            
             try
             {
                 await _context.SaveChangesAsync();

@@ -2,6 +2,18 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
+/*
+This is the model file which maps to the Questions table in the database  
+Fields are:
+1. createBy (string)- the name of the question author
+2. createdDataTime (DateTime)- the date time when the question was created 
+3. title (string)- the title of the question 
+4. subtitle (string)- the subtitle of the question
+5. Options (Collection List) - the list of option entities linked to the question
+6. surveyId (integer) - the foreign key id of the survey the question is linked to 
+7. question type (integer) - Integer representing the question type 
+*/
+
 namespace CompassSurveyTestApp.Models
 {
     public partial class Questions

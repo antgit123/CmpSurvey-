@@ -22,7 +22,8 @@ namespace CompassSurveyTestApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
             //use this setting to connect to local db and run application on local 
             services.AddDbContext<CompassDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("localDB"))); 

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -13,11 +16,11 @@ namespace CompassSurveyTestApp.Models
         public CompassDBContext(DbContextOptions<CompassDBContext> options)
             : base(options)
         {
-        }
+        }     
 
         public virtual DbSet<Options> Options { get; set; }
         public virtual DbSet<Questions> Questions { get; set; }
-        public virtual DbSet<Survey> Survey { get; set; }
+        public virtual DbSet<Survey> Survey { get; set; }      
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -101,5 +104,9 @@ namespace CompassSurveyTestApp.Models
                     .IsUnicode(false);
             });
         }
+        /*public void MarkAsModified(Survey item)
+        {
+            Entry(item).State = EntityState.Modified;
+        }*/
     }
 }
