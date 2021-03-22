@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompassSurveyTestApp", "CompassSurveyTestApp\CompassSurveyTestApp.csproj", "{11832086-9E7C-4CBA-8E02-EF8ED4EC3BEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompassSurveyTestApp", "CompassSurveyTestApp\CompassSurveyTestApp.csproj", "{11832086-9E7C-4CBA-8E02-EF8ED4EC3BEE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompassSurveyUnitTest", "CompassSurveyUnitTest\CompassSurveyUnitTest.csproj", "{5DCCB83E-7A07-4F95-B54C-41146B136F7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{11832086-9E7C-4CBA-8E02-EF8ED4EC3BEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11832086-9E7C-4CBA-8E02-EF8ED4EC3BEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11832086-9E7C-4CBA-8E02-EF8ED4EC3BEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DCCB83E-7A07-4F95-B54C-41146B136F7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DCCB83E-7A07-4F95-B54C-41146B136F7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DCCB83E-7A07-4F95-B54C-41146B136F7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DCCB83E-7A07-4F95-B54C-41146B136F7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

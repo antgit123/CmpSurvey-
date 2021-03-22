@@ -18,7 +18,6 @@ namespace CompassSurveyTestApp.Models
         public string Subtitle { get; set; }
         public int? QuestionType { get; set; }
         public int? SurveyId { get; set; }
-
         [JsonIgnore]
         public Survey Survey { get; set; }
         public ICollection<Options> Options { get; set; }

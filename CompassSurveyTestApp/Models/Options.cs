@@ -10,7 +10,6 @@ namespace CompassSurveyTestApp.Models
         public string OptionId { get; set; }
         public string OptionText { get; set; }
         public int? QuestionId { get; set; }
-
         [JsonIgnore]
         public Questions Question { get; set; }
     }

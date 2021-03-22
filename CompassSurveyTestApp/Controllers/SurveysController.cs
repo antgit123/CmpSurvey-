@@ -5,7 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using CompassSurveyTestApp.CloudDBModels;
+using CompassSurveyTestApp.Models;
+
+/*
+This is the controller file which uses the dbContext class to implement 
+the HTTP API methods for fetching the survey data 
+*/
 
 namespace CompassSurveyTestApp.Controllers
 {

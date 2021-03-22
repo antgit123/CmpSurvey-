@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
 
 namespace CompassSurveyTestApp.Models
 {
@@ -24,12 +23,7 @@ namespace CompassSurveyTestApp.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                /*IConfigurationRoot configuration = new ConfigurationBuilder()
-                            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                            .AddJsonFile("appsettings.json")
-                            .Build */
-                optionsBuilder.UseSqlServer("Server=(localdb)\\ProjectsV13;Database=CompassDB;Trusted_Connection=True;");
-                //optionsBuilder.UseSqlServer()
+                optionsBuilder.UseSqlServer("Data Source=(localdb)\\ProjectsV13;Initial Catalog=CompassDB;Integrated Security=True");
             }
         }
 
@@ -57,7 +51,7 @@ namespace CompassSurveyTestApp.Models
                     .WithMany(p => p.Options)
                     .HasForeignKey(d => d.QuestionId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK__Options__questio__4CA06362");
+                    .HasConstraintName("FK__Options__questio__286302EC");
             });
 
             modelBuilder.Entity<Questions>(entity =>
@@ -93,7 +87,7 @@ namespace CompassSurveyTestApp.Models
                     .WithMany(p => p.Questions)
                     .HasForeignKey(d => d.SurveyId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK__Questions__surve__49C3F6B7");
+                    .HasConstraintName("FK__Questions__surve__25869641");
             });
 
             modelBuilder.Entity<Survey>(entity =>

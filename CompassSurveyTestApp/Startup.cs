@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using CompassSurveyTestApp.CloudDBModels;
+using CompassSurveyTestApp.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CompassSurveyTestApp
@@ -24,11 +24,11 @@ namespace CompassSurveyTestApp
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             //use this setting to connect to local db and run application on local 
-            /*services.AddDbContext<CompassDBContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("localDB"))); */
-            //use this setting to connect to cloud Azure DB and run application on cloud 
             services.AddDbContext<CompassDBContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("AzureDB")));            
+                options.UseSqlServer(Configuration.GetConnectionString("localDB"))); 
+            //use this setting to connect to cloud Azure DB and run application on cloud 
+            /*services.AddDbContext<CompassDBContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("AzureDB"))); */          
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -38,19 +38,16 @@ namespace CompassSurveyTestApp
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            /* if (env.IsDevelopment())
-             {
-                 app.UseDeveloperExceptionPage();
-             }
-             else
-             {
-                 app.UseExceptionHandler("/Error");
-                 app.UseHsts();
-             }*/
-            app.UseDeveloperExceptionPage();
-            app.UseExceptionHandler("/Error");
-            app.UseHsts();
+        {         
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            if (env.IsProduction() || env.IsStaging() || env.IsEnvironment("Staging_2"))
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
+            }             
             app.UseDatabaseErrorPage();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
